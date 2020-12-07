@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.min.js" crossorigin="anonymous"></script>        
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>items</title>
+</head>
+<body>
+    <div id="items"></div>
+    <script>
+        
+        let url = "https://polemika.univ-paris8.fr/omk/api/items?item_set_id=2";
+        getData(url);
+
+        function getData (url){
+            d3.queue()
+            .defer(d3.json, url)
+            .awaitAll(function(error, results) {
+                if (error) throw error;
+                console.log(results);
+                showItems(results);
+            });
+        }
+
+        function showItems(data){
+            if (data[0].length > 1) {
+                var dataItems = data[0];
+            } else {
+                var dataItems = data;
+            }
+
+            var cards = d3.select("#item")
+                .attr("class", "container justify-content-around")
+                .selectAll("div")
+                .data(dataItems)
+                .enter()
+                .append("div")
+                .attr("class","card w-50 col-sm-3 mb-4 mr-4 ml-2 p-1 d-inline-block");
+
+            var cardHeader = cards.append("div")
+                .attr("class", "card-header bg-success text-white text-center title")
+                .html(d => {
+                    return d["o:title"];      
+                });
+
+            var cardBody = cards.append("div")
+                .attr("class", "card-body p-2");
+
+            cardBody.append("p")
+                .html(d => {
+                    return "<a target='_blank' href='" + d["@id"] + "'>" + d["@id"]  + "</a>";
+                });
+
+            cardBody.append("p")
+                .html(d => {
+                    return "<a target='_blank' href='" + d["o:media"][0]["@id"] + "'>" + d["o:media"][0]["@id"]  + "</a>";
+                });
+         }
+    </script>
+</body>
+</html>
