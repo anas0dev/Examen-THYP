@@ -8,8 +8,9 @@
 @prefix teach: <http://linkedscience.org/teach/ns#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/>.
 @prefix schema: <http://schema.org/>.
+@prefix news: <https://anas0dev.github.io/Examen-THYP/vocab.ttl> .
 
-<https://duraspace.org/wp-content/uploads/2020/02/vivo.owl#NewsRelease> a owl:Ontology ;
+<https://anas0dev.github.io/Examen-THYP/vocab.ttl> a owl:Ontology ;
     dcterms:title "News" .
 
 news:News a rdfs:Class ;
