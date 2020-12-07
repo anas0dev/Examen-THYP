@@ -10,44 +10,50 @@
 @prefix schema: <http://schema.org/>.
 @prefix news: <https://anas0dev.github.io/Examen-THYP/vocab.ttl> .
 
+
 <https://anas0dev.github.io/Examen-THYP/vocab.ttl> a owl:Ontology ;
     dcterms:title "News" .
 
-news:News a rdfs:Class ;
-    rdfs:label "News" ;
+news:NewsArticle a rdfs:Class ;
+    rdfs:label "news" ;
     vs:term_status "experimental" .
 
 news:Article a rdfs:Class ;
     rdfs:label "Article" ;
     vs:term_status "experimental" .
 
-news:title a rdfs:Property ;
+NewsArticle:title a rdfs:Property ;
     rdfs:label "titre" ;
     rdfs:domain o:Resource ;
     vs:term_status "experimental" .
 
-news:subTitle a rdfs:Property ;
+NewsArticle:subTitle a rdfs:Property ;
     rdfs:label "sous titre" ;
     rdfs:domain o:Resource ;
     vs:term_status "experimental" .
 
-news:text a rdfs:Property ;
+NewsArticle:text a rdfs:Property ;
     rdfs:label "texte" ;
     rdfs:domain o:Resource ;
     vs:term_status "experimental" .
 
-news:autor a rdfs:Property ;
+Article:autor a rdfs:Property ;
     rdfs:label "auteur" ;
     rdfs:domain o:Resource ;
     vs:term_status "experimental" .
 
-news:datePublication a rdfs:Property ;
+Article:datePublication a rdfs:Property ;
     rdfs:label "date de publication" ;
     rdfs:domain o:Resource ;
     vs:term_status "experimental" .
 
-news:evenement a rdfs:Property ;
+NewsArticle:evenement a rdfs:Property ;
     rdfs:label "evenement" ;
     rdfs:domain o:Resource ;
     vs:term_status "experimental" .
+
+news:hasNews a rdf:Property ;
+    rdfs:label "hasNews" ;
+    rdfs:comment "si c'est un news" ;
+    rdfs:domain o:Resource ; .
 
